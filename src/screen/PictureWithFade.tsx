@@ -34,8 +34,13 @@ export function PictureWithFade({ src }: PictureWithFade) {
     betaSrc: src,
     showAlpha: false,
   });
+  const firstMount = useRef(true);
 
   useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+      return;
+    }
     setState((current) => {
       if (current.showAlpha) {
         return {

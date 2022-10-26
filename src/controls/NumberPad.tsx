@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { Button } from "./Button";
+import { Cursor } from "./Cursor";
 
 const MAX_GUESS = 99;
 
@@ -14,6 +16,7 @@ const CurrentAnswer = styled.p`
   font-size: 2em;
   height: 1em;
   margin-bottom: 12px;
+  margin-top: unset;
 `;
 
 const NumberPadGrid = styled.div`
@@ -24,45 +27,13 @@ const NumberPadGrid = styled.div`
   gap: 12px;
 `;
 
-const NumberButton = styled.button`
-  border: none;
+const NumberButton = styled(Button)`
   height: 40px;
   width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: black;
-  background-color: white;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-  &:active {
-    background-color: #9e9e9e;
-  }
-  &:disabled {
-    opacity: 0.5;
-    cursor: inherit;
-  }
-`;
-
-const cursorBlink = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-      opacity: 0;
-  }
-`;
-
-const Cursor = styled.span`
-  border-left: 1px solid black;
-  animation: ${cursorBlink} 1s steps(1, jump-start) infinite;
-  height: 1em;
 `;
 
 function addDigit(value: number | null, digit: number): number {
@@ -100,54 +71,63 @@ export function NumberPad({ value, onChange, disabled }: NumberPadProps) {
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 7))}
+          type="button"
         >
           7
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 8))}
+          type="button"
         >
           8
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 9))}
+          type="button"
         >
           9
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 4))}
+          type="button"
         >
           4
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 5))}
+          type="button"
         >
           5
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 6))}
+          type="button"
         >
           6
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 1))}
+          type="button"
         >
           1
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 2))}
+          type="button"
         >
           2
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 3))}
+          type="button"
         >
           3
         </NumberButton>
@@ -155,12 +135,14 @@ export function NumberPad({ value, onChange, disabled }: NumberPadProps) {
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 0))}
+          type="button"
         >
           0
         </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(removeDigit(value))}
+          type="button"
         >
           ⬅️
         </NumberButton>

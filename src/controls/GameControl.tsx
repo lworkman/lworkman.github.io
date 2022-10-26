@@ -4,6 +4,7 @@ import { PANEL_SIZE_PMAX } from "../constants";
 import { GuessRow } from "./GuessRow";
 import { NumberPad } from "./NumberPad";
 import { Guess } from "../types";
+import { Button } from "./Button";
 
 const GameControlContainer = styled.div`
   display: flex;
@@ -11,9 +12,28 @@ const GameControlContainer = styled.div`
   flex-direction: column;
   padding-left: var(--screen-padding);
   padding-right: var(--screen-padding);
+  gap: 8px;
+  margin-bottom: 8px;
 `;
 
-function calculateOutputInMonthlyKwh(count: number | null): string | null {
+const ButtonColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+`;
+
+const SplitControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+`;
+
+function calculateSystemSize(count: number | null): string | null {
   if (count === null) {
     return "???";
   }
@@ -27,6 +47,7 @@ interface GameControlProps {
   setCurrentValue: (value: number | null) => void;
   onSkip: () => void;
   onGuess: (value: number | null) => void;
+  onHelp: () => void;
   disabled?: boolean;
 }
 
@@ -36,19 +57,35 @@ export function GameControl({
   setCurrentValue,
   onGuess,
   onSkip,
-  disabled
+  disabled,
+  onHelp
 }: GameControlProps) {
   return (
     <GameControlContainer>
-      <GuessRow
-        guesses={guesses}
-      />
-      <div>Size: {calculateOutputInMonthlyKwh(currentValue)} kW</div>
-      <NumberPad disabled={disabled} onChange={setCurrentValue} value={currentValue} />
-      <div>
-        <button disabled={disabled} onClick={onSkip}>Skip</button>
-        <button disabled={disabled} onClick={() => onGuess(currentValue)}>Guess</button>
-      </div>
+      <GuessRow guesses={guesses} />
+      {/* <div>Size: {calculateOutputInMonthlyKwh(currentValue)} kW</div> */}
+      <SplitControls>
+        <NumberPad
+          disabled={disabled}
+          onChange={setCurrentValue}
+          value={currentValue}
+        />
+        <ButtonColumn>
+          <Button
+            disabled={disabled}
+            onClick={() => onGuess(currentValue)}
+            type="button"
+          >
+            Guess
+          </Button>
+          <Button disabled={disabled} onClick={onSkip} type="button">
+            Skip
+          </Button>
+          <Button type="button" onClick={onHelp}>
+            Help
+          </Button>
+        </ButtonColumn>
+      </SplitControls>
     </GameControlContainer>
   );
 }

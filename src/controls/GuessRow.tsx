@@ -16,12 +16,15 @@ const GuessContainer = styled.div`
 `;
 
 const GuessSpace = styled.div`
+  display: flex;
+  align-items: center;
   background-color: #e0e0e0;
   padding: 4px 6px;
   text-align: center;
   color: white;
-  min-width: 60px;
+  min-width: 62px;
   border-radius: 6px;
+  justify-content: center;
 `;
 
 const typeToBadgeSettings: Record<

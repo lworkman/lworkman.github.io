@@ -7,6 +7,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 8px;
 `;
 
 const InformationBar = styled.div`
@@ -17,9 +19,9 @@ const InformationBar = styled.div`
   gap: 16px;
   flex-wrap: nowrap;
   overflow-x: auto;
-  padding-bottom: 16px;
   padding-left: var(--screen-padding);
   padding-right: var(--screen-padding);
+  padding-bottom: 8px;
 `;
 
 const InformationPointContainer = styled.div`
@@ -31,20 +33,27 @@ const InformationPointContainer = styled.div`
 interface InformationPointProps {
   value: string | number | null;
   label: string;
-  unit?: string;
 }
 
-function InformationPoint({ value, label, unit }: InformationPointProps) {
+function InformationPoint({ value, label }: InformationPointProps) {
   return (
     <InformationPointContainer>
       <span>{label}:</span>
-      <span style={{whiteSpace: 'nowrap'}}>{valueOrPlaceholder(value)} &nbsp;{unit}</span>
+      <span style={{whiteSpace: 'nowrap'}}>{valueOrPlaceholder(value)}</span>
     </InformationPointContainer>
   );
 }
 
 function valueOrPlaceholder(value: string | number | null): string {
   return value ? value.toString() : "??";
+}
+
+function toPercent(value: number | null): string {
+  return `${value === null ? '?? ' : value * 100}%`;
+}
+
+function toKwh(value: number | null): string {
+  return `${value === null ? '??' : value} kWh`;
 }
 
 export interface InformationDisplayProps {
@@ -65,8 +74,8 @@ export function InformationDisplay({
       <PictureWithFade src={picture} />
       <InformationBar>
         <InformationPoint label="Region" value={region} />
-        <InformationPoint label="Consumption" value={monthlyConsumptionKwh} unit="kWh" />
-        <InformationPoint label="Offset" value={offset} />
+        <InformationPoint label="Consumption" value={toKwh(monthlyConsumptionKwh)}/>
+        <InformationPoint label="Offset" value={toPercent(offset)} />
       </InformationBar>
     </Container>
   );
