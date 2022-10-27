@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { PANEL_SIZE_PMAX } from "../constants";
-import { GuessRow } from "./GuessRow";
-import { NumberPad } from "./NumberPad";
 import { Guess } from "../types";
-import { Button } from "./Button";
-import { Knob } from "./Knob";
 import { CurrentValue } from "./CurrentValue";
+import { GuessRow } from "./GuessRow";
+import { Knob } from "./Knob";
+import { NumberPad } from "./NumberPad";
 
 const GameControlContainer = styled.div`
   display: flex;
@@ -16,41 +14,16 @@ const GameControlContainer = styled.div`
   padding-right: var(--screen-padding);
   gap: 8px;
   margin-bottom: 8px;
+  align-items: center;
 `;
-
-const ButtonColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: center;
-`;
-
-const SplitControls = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  gap: 12px;
-`;
-
-function calculateSystemSize(count: number | null): string | null {
-  if (count === null) {
-    return "???";
-  }
-
-  return (Math.round((count * PANEL_SIZE_PMAX) / 10) / 100).toLocaleString();
-}
 
 interface GameControlProps {
   guesses: Guess[];
   currentValue: number | null;
   setCurrentValue: (value: number | null) => void;
-  onSkip: () => void;
   onGuess: (value: number | null) => void;
-  onHelp: () => void;
   disabled?: boolean;
+  useKnob: boolean;
 }
 
 export function GameControl({
@@ -58,36 +31,27 @@ export function GameControl({
   currentValue,
   setCurrentValue,
   onGuess,
-  onSkip,
   disabled,
-  onHelp
+  useKnob,
 }: GameControlProps) {
   return (
     <GameControlContainer>
-      <GuessRow guesses={guesses} />
-      <CurrentValue value={currentValue} />
-      {/* <div>Size: {calculateOutputInMonthlyKwh(currentValue)} kW</div> */}
-      <SplitControls>
-        {/* <Knob onChange={setCurrentValue} /> */}
+      <GuessRow
+        currentValue={currentValue}
+        disabled={!!disabled}
+        guesses={guesses}
+      />
+      <CurrentValue value={currentValue} disabled={disabled} />
+      {useKnob ? (
+        <Knob onChange={setCurrentValue} />
+      ) : (
         <NumberPad
           disabled={disabled}
           onChange={setCurrentValue}
           value={currentValue}
           onGuess={onGuess}
         />
-        {/* <ButtonColumn>
-          <Button
-            disabled={disabled}
-            onClick={() => onGuess(currentValue)}
-            type="button"
-          >
-            Guess
-          </Button>
-          <Button disabled={disabled} onClick={onSkip} type="button">
-            Skip
-          </Button>
-        </ButtonColumn> */}
-      </SplitControls>
+      )}
     </GameControlContainer>
   );
 }

@@ -1,8 +1,6 @@
 export interface StageInformation {
   pictures: {
     bare: string;
-    withRoof: string;
-    withObstructions: string;
     complete: string;
   }
   region: Region;

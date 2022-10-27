@@ -26,15 +26,17 @@ function calculateSystemSize(count: number | null): string | null {
 
 export interface CurrentValueProps {
   value: number | null;
+  disabled?: boolean;
 }
 
-export function CurrentValue({ value }: CurrentValueProps) {
+export function CurrentValue({ value, disabled }: CurrentValueProps) {
   return (
     <Container>
-      <MainValue>
+      {/* <MainValue>
         {value}
-        <Cursor />
-      </MainValue>
+        {!disabled ? <Cursor /> : null}
+         &nbsp;Panels
+      </MainValue> */}
       <Estimate>Estimated Size: {calculateSystemSize(value)} kW</Estimate>
     </Container>
   );

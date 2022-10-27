@@ -72,8 +72,9 @@ const KnobControl = styled.div`
 `;
 
 const DropShadowBackground = styled.div`
-  height: 200px;
-  width: 200px;
+  height: 175px;
+  width: 175px;
+  margin-bottom: 12px;
   box-shadow: 5px 12px 21px 5px #000000;
   border-radius: 100%;
   overflow: hidden;
@@ -101,7 +102,7 @@ function valueToDeg(value: number): number {
 }
 
 function degToValue(deg: number): number {
-  return Math.floor(deg * -1 / STEP_SIZE);
+  return Math.floor((deg * -1) / STEP_SIZE);
 }
 
 function flipAngle(value: number): number {
@@ -112,7 +113,7 @@ export interface KnobProps {
   onChange: (value: number) => void;
 }
 
-export function Knob({onChange}: KnobProps) {
+export function Knob({ onChange }: KnobProps) {
   // Start slightly off center
   const normalRotation = useRef(-45);
   const summedRotation = useRef(0);
@@ -126,7 +127,7 @@ export function Knob({onChange}: KnobProps) {
         let difference = normalRotation.current - newDeg;
 
         // Large differences come from the angle "flipping"
-        if (Math.abs(difference) > 50) {
+        if (Math.abs(difference) > 170) {
           if (oldDeg < 0) {
             difference = flipAngle(oldDeg) - newDeg;
           } else {
@@ -135,6 +136,11 @@ export function Knob({onChange}: KnobProps) {
         }
 
         const newSummedRotation = summedRotation.current + difference;
+        const value = degToValue(newSummedRotation);
+
+        if (value > 99 || value < 0) {
+          return;
+        }
         onChange(degToValue(newSummedRotation));
 
         summedRotation.current = newSummedRotation;

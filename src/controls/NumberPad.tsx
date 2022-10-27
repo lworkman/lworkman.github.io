@@ -12,13 +12,6 @@ const NumberPadContainer = styled.div`
   align-items: center;
 `;
 
-const CurrentAnswer = styled.p`
-  font-size: 2em;
-  height: 1em;
-  margin-bottom: 12px;
-  margin-top: unset;
-`;
-
 const NumberPadGrid = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -61,99 +54,98 @@ export interface NumberPadProps {
   disabled?: boolean;
 }
 
-export function NumberPad({ value, onChange, disabled, onGuess }: NumberPadProps) {
+export function NumberPad({
+  value,
+  onChange,
+  disabled,
+  onGuess,
+}: NumberPadProps) {
   return (
-    <NumberPadContainer>
-      {/* <CurrentAnswer>
-        {value === null ? null : value.toLocaleString()}
-        {!disabled ? <Cursor /> : null}
-      </CurrentAnswer> */}
-      <NumberPadGrid>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 7))}
-          type="button"
-        >
-          7
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 8))}
-          type="button"
-        >
-          8
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 9))}
-          type="button"
-        >
-          9
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 4))}
-          type="button"
-        >
-          4
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 5))}
-          type="button"
-        >
-          5
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 6))}
-          type="button"
-        >
-          6
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 1))}
-          type="button"
-        >
-          1
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 2))}
-          type="button"
-        >
-          2
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 3))}
-          type="button"
-        >
-          3
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(removeDigit(value))}
-          type="button"
-        >
-          ⬅️
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onChange(addDigit(value, 0))}
-          type="button"
-        >
-          0
-        </NumberButton>
-        <NumberButton
-          disabled={disabled}
-          onClick={() => onGuess(value)}
-          type="button"
-        >
-          ✓
-        </NumberButton>
-      </NumberPadGrid>
-    </NumberPadContainer>
+    <NumberPadGrid>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 7))}
+        type="button"
+      >
+        7
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 8))}
+        type="button"
+      >
+        8
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 9))}
+        type="button"
+      >
+        9
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 4))}
+        type="button"
+      >
+        4
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 5))}
+        type="button"
+      >
+        5
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 6))}
+        type="button"
+      >
+        6
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 1))}
+        type="button"
+      >
+        1
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 2))}
+        type="button"
+      >
+        2
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 3))}
+        type="button"
+      >
+        3
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(removeDigit(value))}
+        type="button"
+      >
+        ⬅️
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onChange(addDigit(value, 0))}
+        type="button"
+      >
+        0
+      </NumberButton>
+      <NumberButton
+        disabled={disabled}
+        onClick={() => onGuess(value)}
+        type="button"
+      >
+        ✓
+      </NumberButton>
+    </NumberPadGrid>
   );
 }

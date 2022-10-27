@@ -5,6 +5,7 @@ export const Button = styled.button`
   padding: 8px 16px;
   border-radius: 6px;
   background-color: #eaeaea;
+  font-size: 24px;
 
   &:hover {
     background-color: #e0e0e0;

@@ -2,16 +2,11 @@ import { CurrentStep, StageInformation, Step } from "../types";
 
 const stages: StageInformation[] = [
   {
-    panelCount: 15,
+    panelCount: 18,
     monthlyConsumptionKwh: 608,
     pictures: {
-      bare: new URL("./stage-pictures/bare.png", import.meta.url).href,
-      withObstructions: new URL(
-        "./stage-pictures/with_obstructions.png",
-        import.meta.url
-      ).href,
-      withRoof: new URL("./stage-pictures/roof.png", import.meta.url).href,
-      complete: new URL("./stage-pictures/complete.png", import.meta.url).href,
+      bare: new URL("./stage-pictures/bare-min.png", import.meta.url).href,
+      complete: new URL("./stage-pictures/complete-min.png", import.meta.url).href,
     },
     region: "Southeast",
     offset: 1,

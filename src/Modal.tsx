@@ -38,12 +38,6 @@ const ModalBody = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
-const ButtonRow = styled.div`
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
 
 interface ModalProps {
   onClose: () => void;
@@ -56,11 +50,6 @@ export function Modal({ children, onClose }: ModalProps) {
       <Backdrop onClick={onClose} />
       <ModalBody>
         <div>{children}</div>
-        <ButtonRow>
-          <Button onClick={onClose} type="submit">
-            Okay!
-          </Button>
-        </ButtonRow>
       </ModalBody>
     </ModalPositioner>
   );

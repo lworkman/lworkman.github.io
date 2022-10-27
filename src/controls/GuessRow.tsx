@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Guess } from "../types";
+import { makeArrayLength } from "../util";
 import { ArrowIncrease } from "./ArrowHigher";
 import { Checkmark } from "./CheckMark";
-
-const GUESS_COUNT = 5;
+import { Cursor } from "./Cursor";
+import { GuessSquare } from "./GuessSquare";
 
 const GuessContainer = styled.div`
   display: flex;
@@ -12,18 +13,6 @@ const GuessContainer = styled.div`
   gap: 8px;
   flex-wrap: none;
   overflow-x: auto;
-  justify-content: center;
-`;
-
-const GuessSpace = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #e0e0e0;
-  padding: 4px 6px;
-  text-align: center;
-  color: white;
-  min-width: 62px;
-  border-radius: 6px;
   justify-content: center;
 `;
 
@@ -56,47 +45,40 @@ function formatValue(value: number | null): string {
   return value === null ? "? ? ?" : value.toLocaleString();
 }
 
-interface GuessComponentProps {
-  guess: Guess | null;
-}
-
-function GuessComponent({ guess }: GuessComponentProps) {
-  if (guess === null) {
-    return (
-      <GuessSpace>
-        &nbsp;
-      </GuessSpace>
-    );
-  }
-
-  const { backgroundColor, gem } = typeToBadgeSettings[guess.type];
-
-  return (
-    <GuessSpace
-      style={{
-        backgroundColor,
-      }}
-    >
-      {formatValue(guess.value)}
-      {gem}
-    </GuessSpace>
-  );
-}
-
-function makeArrayLength<ArrayType>(arr: ArrayType[]): (ArrayType | null)[] {
-  const hack = [...arr];
-  hack.length = GUESS_COUNT;
-
-  return Array.from(hack, (val) => val ?? null);
-}
-
 export interface GuessRowProps {
+  currentValue: number | null;
   guesses: Guess[];
+  disabled: boolean;
 }
 
-export function GuessRow({ guesses }: GuessRowProps) {
-  const elements = makeArrayLength(guesses).map((item, i) => {
-    return <GuessComponent key={`guess-${i}`} guess={item} />;
+export function GuessRow({ guesses, currentValue, disabled }: GuessRowProps) {
+  const elements = makeArrayLength(guesses).map((item, i, arr) => {
+    const key = `guess-${i}`;
+    if (item) {
+      const { backgroundColor, gem } = typeToBadgeSettings[item.type];
+      return (
+        <GuessSquare
+          style={{
+            backgroundColor,
+            color: "white",
+          }}
+          key={key}
+          isGuess
+        >
+          {formatValue(item.value)}
+          {gem}
+        </GuessSquare>
+      );
+    }
+    if (!disabled && !item && (arr[i - 1] || i === 0)) {
+      return (
+        <GuessSquare key={key}>
+          {currentValue}
+          <Cursor />
+        </GuessSquare>
+      );
+    }
+    return <GuessSquare key={key}>&nbsp;</GuessSquare>;
   });
 
   return <GuessContainer>{elements}</GuessContainer>;
