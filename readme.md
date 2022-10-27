@@ -5,3 +5,5 @@ Stretch goals:
 * Fancy input
 * More animations
 * Animate answer reveal?
+* Copy score
+* Saving

@@ -5,6 +5,7 @@ import { GuessRow } from "./GuessRow";
 import { NumberPad } from "./NumberPad";
 import { Guess } from "../types";
 import { Button } from "./Button";
+import { Knob } from "./Knob";
 
 const GameControlContainer = styled.div`
   display: flex;
@@ -27,10 +28,10 @@ const SplitControls = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  overflow-x: auto;
   width: 100%;
-  max-width: 280px;
+  max-width: 350px;
   margin: 0 auto;
+  gap: 12px;
 `;
 
 function calculateSystemSize(count: number | null): string | null {
@@ -64,12 +65,14 @@ export function GameControl({
     <GameControlContainer>
       <GuessRow guesses={guesses} />
       {/* <div>Size: {calculateOutputInMonthlyKwh(currentValue)} kW</div> */}
+      {currentValue ?? "??"}
       <SplitControls>
-        <NumberPad
+        <Knob onChange={setCurrentValue} />
+        {/* <NumberPad
           disabled={disabled}
           onChange={setCurrentValue}
           value={currentValue}
-        />
+        /> */}
         <ButtonColumn>
           <Button
             disabled={disabled}
