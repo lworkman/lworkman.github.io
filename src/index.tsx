@@ -6,6 +6,8 @@ import { GameStage } from "./Gamestage";
 const AppBody = styled.div`
   margin: 0 auto;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 function App() {

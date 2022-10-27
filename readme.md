@@ -1,9 +1,10 @@
 Stretch goals:
 * Sounds
 * Confetti on win
-* Multiple stages
 * Fancy input
-* More animations
 * Animate answer reveal?
 * Copy score
 * Saving
+* Title Bar
+* Increase size of buttons
+* Make better use of space

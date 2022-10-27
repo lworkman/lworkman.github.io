@@ -6,6 +6,7 @@ import { InformationDisplay } from "./screen/InformationDisplay";
 import { finishedStageToStep, stageToStep, timeToStage } from "./engine/stages";
 import { Guess, Step } from "./types";
 import { Modal } from "./Modal";
+import { Title } from "./Title";
 
 const testGuesses: Guess[] = [
   {
@@ -30,16 +31,14 @@ function WelcomeToSolardle() {
   return (
     <div>
       <h3>How to Play</h3>
-      <p>Guess the number of panels in 5 tries</p>
+      <p>Guess the number of panels needed to get to 100% offset.</p>
       <p>
-        Solardle is a guessing game where you, the player, are trying to figure
-        out how many panels a roof needs to get (or get as close as possible to)
-        100% energy offset.
+        More information is revealed with each guess:
       </p>
-      <p>
-        With each guess, the game reveals if your guess is too low, too high, or
-        correct. More information about the roof is revealed with each guess.
-      </p>
+      <ul>
+        <li>Where your guess is in relation to the answer</li>
+        <li>The conditions of the roof</li>
+      </ul>
     </div>
   );
 }
@@ -68,11 +67,11 @@ function OutOfGuesses({ answer }: OutOfGuessesProps) {
 
 const StageContainer = styled.div`
   display: flex;
-  flex: 1 0 800px;
+  flex: 1 1 500px;
   flex-direction: column;
-  height: 100%;
   margin: 0 auto;
   max-width: 600px;
+  width: 100%;
 `;
 
 export function GameStage() {
@@ -122,20 +121,23 @@ export function GameStage() {
   }, []);
 
   return (
-    <StageContainer>
-      <InformationDisplay {...stageStep} />
-      <GameControl
-        currentValue={currentGuess}
-        guesses={gameState.guesses}
-        setCurrentValue={setCurrentGuess}
-        onGuess={guess}
-        onSkip={skip}
-        disabled={gameState.isDone}
-        onHelp={openHelp}
-      />
-      {modalContent ? (
-        <Modal onClose={() => setModalContent(null)}>{modalContent}</Modal>
-      ) : null}
-    </StageContainer>
+    <>
+      <Title onHelp={openHelp} />
+      <StageContainer>
+        <InformationDisplay {...stageStep} />
+        <GameControl
+          currentValue={currentGuess}
+          guesses={gameState.guesses}
+          setCurrentValue={setCurrentGuess}
+          onGuess={guess}
+          onSkip={skip}
+          disabled={gameState.isDone}
+          onHelp={openHelp}
+        />
+        {modalContent ? (
+          <Modal onClose={() => setModalContent(null)}>{modalContent}</Modal>
+        ) : null}
+      </StageContainer>
+    </>
   );
 }

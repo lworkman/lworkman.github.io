@@ -6,6 +6,7 @@ import { NumberPad } from "./NumberPad";
 import { Guess } from "../types";
 import { Button } from "./Button";
 import { Knob } from "./Knob";
+import { CurrentValue } from "./CurrentValue";
 
 const GameControlContainer = styled.div`
   display: flex;
@@ -64,16 +65,17 @@ export function GameControl({
   return (
     <GameControlContainer>
       <GuessRow guesses={guesses} />
+      <CurrentValue value={currentValue} />
       {/* <div>Size: {calculateOutputInMonthlyKwh(currentValue)} kW</div> */}
-      {currentValue ?? "??"}
       <SplitControls>
-        <Knob onChange={setCurrentValue} />
-        {/* <NumberPad
+        {/* <Knob onChange={setCurrentValue} /> */}
+        <NumberPad
           disabled={disabled}
           onChange={setCurrentValue}
           value={currentValue}
-        /> */}
-        <ButtonColumn>
+          onGuess={onGuess}
+        />
+        {/* <ButtonColumn>
           <Button
             disabled={disabled}
             onClick={() => onGuess(currentValue)}
@@ -84,10 +86,7 @@ export function GameControl({
           <Button disabled={disabled} onClick={onSkip} type="button">
             Skip
           </Button>
-          <Button type="button" onClick={onHelp}>
-            Help
-          </Button>
-        </ButtonColumn>
+        </ButtonColumn> */}
       </SplitControls>
     </GameControlContainer>
   );

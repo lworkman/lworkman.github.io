@@ -1,6 +1,15 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import { Button } from "./controls/Button";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const Backdrop = styled.div`
   position: absolute;
@@ -14,6 +23,7 @@ const ModalPositioner = styled.div`
   align-items: center;
   justify-content: center;
   inset: 0;
+  animation: ${fadeIn} 0.2s linear;
 `;
 
 const ModalBody = styled.div`

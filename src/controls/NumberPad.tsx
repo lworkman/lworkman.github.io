@@ -57,16 +57,17 @@ function removeDigit(value: number | null): number | null {
 export interface NumberPadProps {
   value: number | null;
   onChange: (value: number | null) => void;
+  onGuess: (value: number | null) => void;
   disabled?: boolean;
 }
 
-export function NumberPad({ value, onChange, disabled }: NumberPadProps) {
+export function NumberPad({ value, onChange, disabled, onGuess }: NumberPadProps) {
   return (
     <NumberPadContainer>
-      <CurrentAnswer>
+      {/* <CurrentAnswer>
         {value === null ? null : value.toLocaleString()}
         {!disabled ? <Cursor /> : null}
-      </CurrentAnswer>
+      </CurrentAnswer> */}
       <NumberPadGrid>
         <NumberButton
           disabled={disabled}
@@ -131,7 +132,13 @@ export function NumberPad({ value, onChange, disabled }: NumberPadProps) {
         >
           3
         </NumberButton>
-        <div />
+        <NumberButton
+          disabled={disabled}
+          onClick={() => onChange(removeDigit(value))}
+          type="button"
+        >
+          ⬅️
+        </NumberButton>
         <NumberButton
           disabled={disabled}
           onClick={() => onChange(addDigit(value, 0))}
@@ -141,10 +148,10 @@ export function NumberPad({ value, onChange, disabled }: NumberPadProps) {
         </NumberButton>
         <NumberButton
           disabled={disabled}
-          onClick={() => onChange(removeDigit(value))}
+          onClick={() => onGuess(value)}
           type="button"
         >
-          ⬅️
+          ✓
         </NumberButton>
       </NumberPadGrid>
     </NumberPadContainer>

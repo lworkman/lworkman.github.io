@@ -68,6 +68,7 @@ const KnobControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: none;
 `;
 
 const DropShadowBackground = styled.div`
@@ -86,6 +87,7 @@ const Nubbin = styled.div`
   top: 12px;
   width: 20px;
   height: 20px;
+  touch-action: none;
 `;
 
 function angleBetweenPosition(pos1: Position, pos2: Position): number {

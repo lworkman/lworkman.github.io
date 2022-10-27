@@ -40,7 +40,7 @@ export function stageToStep(stage: StageInformation, step: Step): CurrentStep {
       return {
         panelCount: stage.panelCount,
         monthlyConsumptionKwh: stage.monthlyConsumptionKwh,
-        picture: stage.pictures.withRoof,
+        picture: stage.pictures.bare,
         region: stage.region,
         offset: null,
       };
@@ -48,7 +48,7 @@ export function stageToStep(stage: StageInformation, step: Step): CurrentStep {
       return {
         panelCount: stage.panelCount,
         monthlyConsumptionKwh: stage.monthlyConsumptionKwh,
-        picture: stage.pictures.withObstructions,
+        picture: stage.pictures.bare,
         region: stage.region,
         offset: null,
       };
@@ -56,7 +56,7 @@ export function stageToStep(stage: StageInformation, step: Step): CurrentStep {
       return {
         panelCount: stage.panelCount,
         monthlyConsumptionKwh: stage.monthlyConsumptionKwh,
-        picture: stage.pictures.withObstructions,
+        picture: stage.pictures.bare,
         region: stage.region,
         offset: stage.offset,
       };

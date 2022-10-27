@@ -7,7 +7,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  border-bottom: 2px solid #e0e0e0;
   margin-bottom: 8px;
 `;
 
@@ -39,7 +38,7 @@ function InformationPoint({ value, label }: InformationPointProps) {
   return (
     <InformationPointContainer>
       <span>{label}:</span>
-      <span style={{whiteSpace: 'nowrap'}}>{valueOrPlaceholder(value)}</span>
+      <span style={{ whiteSpace: "nowrap" }}>{valueOrPlaceholder(value)}</span>
     </InformationPointContainer>
   );
 }
@@ -49,11 +48,11 @@ function valueOrPlaceholder(value: string | number | null): string {
 }
 
 function toPercent(value: number | null): string {
-  return `${value === null ? '?? ' : value * 100}%`;
+  return `${value === null ? "?? " : value * 100}%`;
 }
 
 function toKwh(value: number | null): string {
-  return `${value === null ? '??' : value} kWh`;
+  return `${value === null ? "??" : value} kWh`;
 }
 
 export interface InformationDisplayProps {
@@ -71,12 +70,14 @@ export function InformationDisplay({
 }: InformationDisplayProps) {
   return (
     <Container>
-      <PictureWithFade src={picture} />
       <InformationBar>
         <InformationPoint label="Region" value={region} />
-        <InformationPoint label="Consumption" value={toKwh(monthlyConsumptionKwh)}/>
-        <InformationPoint label="Offset" value={toPercent(offset)} />
+        <InformationPoint
+          label="Consumption"
+          value={toKwh(monthlyConsumptionKwh)}
+        />
       </InformationBar>
+      <PictureWithFade src={picture} />
     </Container>
   );
 }
