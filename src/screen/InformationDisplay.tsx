@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Region } from "../types";
 import styled from "styled-components";
 import { PictureWithFade } from "./PictureWithFade";
@@ -30,7 +30,7 @@ const InformationPointContainer = styled.div`
 `;
 
 interface InformationPointProps {
-  value: string | number | null;
+  value: string | number;
   label: string;
 }
 
@@ -38,34 +38,24 @@ function InformationPoint({ value, label }: InformationPointProps) {
   return (
     <InformationPointContainer>
       <span>{label}:</span>
-      <span style={{ whiteSpace: "nowrap" }}>{valueOrPlaceholder(value)}</span>
+      <span style={{ whiteSpace: "nowrap" }}>{value}</span>
     </InformationPointContainer>
   );
 }
 
-function valueOrPlaceholder(value: string | number | null): string {
-  return value ? value.toString() : "??";
-}
-
-function toPercent(value: number | null): string {
-  return `${value === null ? "?? " : value * 100}%`;
-}
-
-function toKwh(value: number | null): string {
-  return `${value === null ? "??" : value} kWh`;
+function toKwh(value: number): string {
+  return `${value} kWh`;
 }
 
 export interface InformationDisplayProps {
   picture: string;
-  region: Region | null;
-  offset: number | null;
-  monthlyConsumptionKwh: number | null;
+  region: Region;
+  monthlyConsumptionKwh: number;
 }
 
 export function InformationDisplay({
   picture,
   region,
-  offset,
   monthlyConsumptionKwh,
 }: InformationDisplayProps) {
   return (
@@ -73,7 +63,7 @@ export function InformationDisplay({
       <InformationBar>
         <InformationPoint label="Region" value={region} />
         <InformationPoint
-          label="Consumption"
+          label="Energy Use"
           value={toKwh(monthlyConsumptionKwh)}
         />
       </InformationBar>

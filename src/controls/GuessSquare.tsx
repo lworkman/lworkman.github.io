@@ -22,7 +22,7 @@ const GuessSpace = styled(motion.div)`
   border-radius: 6px;
   justify-content: center;
   color: black;
-  font-size: 24px;
+  font-size: 22px;
 `;
 
 export interface GuessSquareProps {

@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { GameControl } from "./controls/GameControl";
 import { GameEngine, GameStateUnion } from "./engine/GameEngine";
 import { InformationDisplay } from "./screen/InformationDisplay";
-import { finishedStageToStep, stageToStep, timeToStage } from "./engine/stages";
-import { Step } from "./types";
+import { stageToStep, timeToStage } from "./engine/stages";
 import { Modal } from "./Modal";
 import { Title } from "./Title";
 import { OutOfGuesses, WelcomeToSolardle, YouWinMessage } from "./messages";
@@ -30,9 +29,7 @@ export function GameStage() {
   const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
   const [fancyMode, setFancyMode] = useState(false);
 
-  const stageStep = gameState.isDone
-    ? finishedStageToStep(stage)
-    : stageToStep(stage, gameState.guesses.length as Step);
+  const stageStep = stageToStep(stage, gameState.isDone);
 
   const guess = (value: number | null) => {
     if (gameState.isDone) {

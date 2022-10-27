@@ -4,17 +4,15 @@ export interface StageInformation {
     complete: string;
   }
   region: Region;
-  monthlyConsumptionKwh: number; // watts
+  monthlyConsumptionKwh: number;
   panelCount: number;
-  offset: number; // decimal to 2 points
 }
 
 export interface CurrentStep {
   picture: string;
-  region: Region | null;
-  monthlyConsumptionKwh: number | null;
+  region: Region;
+  monthlyConsumptionKwh: number;
   panelCount: number;
-  offset: number | null;
 }
 
 export interface Guess {

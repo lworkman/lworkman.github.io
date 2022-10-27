@@ -51,7 +51,7 @@ export function WelcomeToSolardle({
     <div>
       <h3>How to Play</h3>
       <p>Guess the number of panels needed to get to 100% offset.</p>
-      <p>More information is revealed with each guess. Have fun!</p>
+      <p>Every guess is either marked as too high or too low. Have fun!</p>
       <ButtonRow>
         <Button onClick={onClose} type="submit">
           Okay!
